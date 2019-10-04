@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureDBAutoFirewall.Fx", "AzureDBAutoFirewall.Fx\AzureDBAutoFirewall.Fx.csproj", "{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4517386-8A59-404C-985F-7859AE19E847}
+	EndGlobalSection
+EndGlobal
