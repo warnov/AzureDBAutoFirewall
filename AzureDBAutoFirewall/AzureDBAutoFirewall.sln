@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureDBAutoFirewall.Fx", "AzureDBAutoFirewall.Fx\AzureDBAutoFirewall.Fx.csproj", "{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureDBAutoFirewall.Fx", "AzureDBAutoFirewall.Fx\AzureDBAutoFirewall.Fx.csproj", "{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureDBAutoFirewall.CoreConsole", "AzureDBAutoFirewall.CoreConsole\AzureDBAutoFirewall.CoreConsole.csproj", "{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
