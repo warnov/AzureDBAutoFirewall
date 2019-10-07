@@ -22,9 +22,8 @@ namespace AzureDBAutoFirewall.CoreConsole
             var subscriptionId = Environment.GetEnvironmentVariable("subscriptionId");
             var azure = GetAzure(authFile, subscriptionId);
 
-            var sqlsrvList = azure.SqlServers.List();
             var sqlServer =
-                (from server in sqlsrvList
+                (from server in azure.SqlServers.List()
                  where server.Name == sqlServerName
                  select server).FirstOrDefault();
 
@@ -47,8 +46,7 @@ namespace AzureDBAutoFirewall.CoreConsole
             return Azure
                 .Configure()
                 .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
-                .Authenticate(credentials)
-                .WithDefaultSubscription();
+                .Authenticate(credentials).WithSubscription(subscriptionId);
         }
     }
 }
