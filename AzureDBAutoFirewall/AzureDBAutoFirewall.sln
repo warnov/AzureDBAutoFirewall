@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureDBAutoFirewall.Fx", "AzureDBAutoFirewall.Fx\AzureDBAutoFirewall.Fx.csproj", "{1CFC4A6A-3546-4060-89C3-DBEC78DA6FC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureDBAutoFirewall.CoreConsole", "AzureDBAutoFirewall.CoreConsole\AzureDBAutoFirewall.CoreConsole.csproj", "{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureDBAutoFirewall.CoreConsole", "AzureDBAutoFirewall.CoreConsole\AzureDBAutoFirewall.CoreConsole.csproj", "{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureDBAutoFirewall.CoreClient", "AzureDBAutoFirewall.CoreClient\AzureDBAutoFirewall.CoreClient.csproj", "{E9ED44AE-4943-4E03-85A6-E0CA228E9633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureDBAutoFirewall.Lib", "AzureDBAutoFirewall.Lib\AzureDBAutoFirewall.Lib.csproj", "{AEA7BF48-4B6A-4A6F-8429-CCDBD00AF2A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0DE5301-074F-4A40-A6C2-6576C47AC6BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9ED44AE-4943-4E03-85A6-E0CA228E9633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9ED44AE-4943-4E03-85A6-E0CA228E9633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9ED44AE-4943-4E03-85A6-E0CA228E9633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9ED44AE-4943-4E03-85A6-E0CA228E9633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA7BF48-4B6A-4A6F-8429-CCDBD00AF2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA7BF48-4B6A-4A6F-8429-CCDBD00AF2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA7BF48-4B6A-4A6F-8429-CCDBD00AF2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA7BF48-4B6A-4A6F-8429-CCDBD00AF2A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

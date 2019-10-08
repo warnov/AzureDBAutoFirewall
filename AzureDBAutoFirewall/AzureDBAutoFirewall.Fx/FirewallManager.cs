@@ -1,3 +1,4 @@
+using AzureDBAutoFirewall.Lib;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Management.Fluent;
@@ -8,6 +9,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,35 +23,74 @@ namespace AzureDBAutoFirewall.Fx
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
+            //Getting environment variables
+            var sqlServerName = Environment.GetEnvironmentVariable("SqlServerName");
+            var authFile = Environment.GetEnvironmentVariable("AzureAuthLocation");
+            var subscriptionId = Environment.GetEnvironmentVariable("SubscriptionId");
+            var storageConnectionString = Environment.GetEnvironmentVariable("AzureConnectionString");
+            var controlTableName = Environment.GetEnvironmentVariable("ControlTableName");
+
+            //Receiving parameters into a firewallManager object
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            var oldIp = data?.oldIp;
-            string clientIP = req.Headers["X-Forwarded-For"][0];
-            var sqlServerName = Environment.GetEnvironmentVariable("sqlServerName");
-            var authFile = Environment.GetEnvironmentVariable("azureAuthLocation");
-            var subscriptionId = Environment.GetEnvironmentVariable("subscriptionId");
-            var storageConnectionString = Environment.GetEnvironmentVariable("storageConnectionString");
-            var controlTableName = Environment.GetEnvironmentVariable("controlTableName");
-            var azure = GetAzure(authFile, subscriptionId);
+            var firewallManager = JsonConvert.DeserializeObject<FirewallManagerPayloadIn>(requestBody);
+            firewallManager.NewIp = req.Headers["X-Forwarded-For"][0];
+            firewallManager.SetStorage(storageConnectionString, controlTableName);
 
-            var sqlServer =
-               (from server in azure.SqlServers.List()
-                where server.Name == sqlServerName
-                select server).FirstOrDefault();
+            //Determining the location of the auth file
+            var home = Environment.GetEnvironmentVariable("HOME", EnvironmentVariableTarget.Process);
+            var authFilePath = String.IsNullOrEmpty(home) ?
+                @$"..\..\..\{authFile}" :
+                Path.Combine(home, @"site\wwwroot\Files", authFile);
+           
 
-            var oldFirewallRule =
-                (from fwrule in sqlServer.FirewallRules.List()
-                 where fwrule.StartIPAddress == oldIp
-                 select fwrule).FirstOrDefault();
-            oldFirewallRule.Delete();
+            if (firewallManager.Authorize())
+            {
+                try
+                {
+                    //Get Azure
+                    var azure = GetAzure(authFilePath, subscriptionId);
 
-            var newFirewallRule = sqlServer.FirewallRules.Define("userReq")
-                    .WithIPAddress(clientIP)
-                    .Create();
+                    //Get SQL Server
+                    var sqlServer =
+                       (from server in azure.SqlServers.List()
+                        where server.Name == sqlServerName
+                        select server).FirstOrDefault();
 
-            return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+                    //Delete old rule
+                    var oldFirewallRule =
+                        (from fwrule in sqlServer.FirewallRules.List()
+                         where fwrule.StartIPAddress == firewallManager.OldIp
+                         select fwrule).FirstOrDefault();
+                    oldFirewallRule.Delete();
+
+                    //Add new Rule
+                    var newFirewallRule = sqlServer.FirewallRules.Define("userReq")
+                            .WithIPAddress(firewallManager.NewIp)
+                            .Create();
+
+                    //Audit the operation
+                    var firewallEntities = new List<FirewallManagerPayloadIn>()
+                { 
+                    //Token registry update (to mark last ip)
+                    new FirewallManagerPayloadIn()
+                    {
+                        PartitionKey = firewallManager.PartitionKey,
+                        RowKey = "token",
+                        NewIp = firewallManager.NewIp
+                    },
+                    //Operation insert (to have traceability)
+                    firewallManager
+                };
+                    //Excute the batch insertion
+                    firewallManager.BatchInsertOrMerge(firewallEntities);
+                    return new OkObjectResult("Firewall configured OK");
+                }
+                catch
+                {
+                    return new ConflictResult();
+                }
+            }
+            else return new UnauthorizedResult();
         }
 
         private static IAzure GetAzure(string authFile, string subscriptionId)
