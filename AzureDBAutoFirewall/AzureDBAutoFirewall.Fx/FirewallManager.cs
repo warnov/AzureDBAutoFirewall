@@ -33,7 +33,7 @@ namespace AzureDBAutoFirewall.Fx
             //Receiving parameters into a firewallManager object
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var firewallManager = JsonConvert.DeserializeObject<FirewallManagerPayloadIn>(requestBody);
-            firewallManager.NewIp = req.Headers["X-Forwarded-For"][0];
+            firewallManager.NewIp = req.Headers["X -Forwarded-For"][0];
             firewallManager.SetStorage(storageConnectionString, controlTableName);
 
             //Determining the location of the auth file
@@ -61,10 +61,11 @@ namespace AzureDBAutoFirewall.Fx
                         (from fwrule in sqlServer.FirewallRules.List()
                          where fwrule.StartIPAddress == firewallManager.OldIp
                          select fwrule).FirstOrDefault();
-                    oldFirewallRule.Delete();
+                    if (oldFirewallRule != null)
+                        oldFirewallRule.Delete();
 
                     //Add new Rule
-                    var newFirewallRule = sqlServer.FirewallRules.Define("userReq")
+                    var newFirewallRule = sqlServer.FirewallRules.Define(firewallManager.UserName)
                             .WithIPAddress(firewallManager.NewIp)
                             .Create();
 
@@ -85,9 +86,9 @@ namespace AzureDBAutoFirewall.Fx
                     firewallManager.BatchInsertOrMerge(firewallEntities);
                     return new OkObjectResult("Firewall configured OK");
                 }
-                catch
+                catch(Exception exc)
                 {
-                    return new ConflictResult();
+                    return new ConflictObjectResult(exc);
                 }
             }
             else return new UnauthorizedResult();

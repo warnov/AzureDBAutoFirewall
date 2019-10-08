@@ -21,6 +21,7 @@ namespace AzureDBAutoFirewall.CoreClient
             };
             string fxUrl = "http://localhost:7071/api/FirewallManager";
             var result = EasyPost.Post(fxUrl, firewallManager);
+            Console.WriteLine(result.Content.ReadAsStringAsync().Result);
         }
     }
 }
