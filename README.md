@@ -31,9 +31,9 @@ The function needs to know what table it is going to use to authorize and keep t
 By now, you know that all the magic is done by the Azure Function. As mentioned before, the operations are made using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet); so the function needs permissions to read and create resources in your Azure subscription in order to use the Azure Management Libraries for .NET. To this end, you need to [create a service principal](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet#mgmt-file) and configure your app to run with its credentials to grant this access. Service principals provide a way to create a non-interactive account associated with your identity to which you grant only the privileges your app needs to run. You can create one using the Azure CLI:
 
     az ad sp create-for-rbac --sdk-auth > my.auth
-In this example, the service principal is stored in a f
+In this example, the service principal will have access to the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet) and is stored in a file named `my.auth`. This file 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwOTg3ODc3NywtMjM4OTc0MDQ1LC0xOT
+eyJoaXN0b3J5IjpbMTE2NTA5MTkyOCwtMjM4OTc0MDQ1LC0xOT
 Q2MTA1NjIyLDEyMTQ4ODk2MjAsLTk5OTU4MzAwMSwxMDA2MjI0
 MjUwLC03NTI1NTQ1NDVdfQ==
 -->
