@@ -11,8 +11,8 @@ This implies that you need to have an Azure Table ready with all the usernames a
 #### Azure Table required structure
 A picture is worth a thousand words:
 ![Initial State](https://lh3.googleusercontent.com/mcmNXDALE6sbgwMKRtBzSdTaHGcRJchZYRcmvAeq3QODZJoFlR5Dnb_jn_wsbpMUkLgR0U7Zpm4 "Initial State")
-This is how the table will look before the system starts working. You could be tempted to think: "Why not just inserting the token as the RowKey?" But, as this solution also offers audit for all the requests made (when new firewall updates were requested, by whom and through which IPs), we would need 2 tables to have these records and then extra development work to keep these tables in sync. So I came with this approach of
+This is how the table will look before the system starts working. You could be tempted to think: "Why not just inserting the token as the RowKey?" But, as this solution also offers audit for all the requests made (when new firewall updates were requested, by whom and through which IPs), we would need 2 tables to have these records and then extra development work to keep these tables in sync. So I came with this approach of using just one table partitioned by users. And the RowKey will have either the word token to identify were to find the token for a user (and then be able to authenticate it) or a datetime indicating 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDUyNjAxNzkwLC05OTk1ODMwMDEsMTAwNj
-IyNDI1MCwtNzUyNTU0NTQ1XX0=
+eyJoaXN0b3J5IjpbMTgzNTc0NDY4MywtOTk5NTgzMDAxLDEwMD
+YyMjQyNTAsLTc1MjU1NDU0NV19
 -->
