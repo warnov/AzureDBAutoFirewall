@@ -17,8 +17,8 @@ You could be tempted to think: "Why not just inserting the token as the RowKey?"
 ![Working State](https://lh3.googleusercontent.com/lQM3sLpvGLh18Brf6SXZZYO6StewjNGhM-rqkxvK5LX5MCseaYf6kxTNAfC62iZIWm1sK5OHbSA "Working State")
 Here is the table after some operation ordered descending by RowKey. You can find here that the user developer1 has never requested the service while QATeam has its current firewall rule set to the IP 161.220.150.31; and that this last change was requested on 2019-10-09T19:12:00.9577602Z and finally that the value from the IP before this was 160.22.15.31. So we have a complete traceability here. All this data is filled by the function so you don't have to make any additional manual work besides initializing the table with usernames and tokens.
 #### Azure Function required parameters
-The function needs to know what table it is going to use to authorize and keep track of the operations. Also, how to access that table (Azure Storage Connection String). Besides, what server firewall is going to be used, and so on. So it is required that you set up th
+The function needs to know what table it is going to use to authorize and keep track of the operations. Also, how to access that table (Azure Storage Connection String). Besides, what server firewall is going to be used, and so on. So it is required that you set up these application settings once the function is deployed:
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3MTY0MTkzMSwxMjE0ODg5NjIwLC05OT
-k1ODMwMDEsMTAwNjIyNDI1MCwtNzUyNTU0NTQ1XX0=
+eyJoaXN0b3J5IjpbNzY1Mjk4NzY1LDEyMTQ4ODk2MjAsLTk5OT
+U4MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1NDVdfQ==
 -->
