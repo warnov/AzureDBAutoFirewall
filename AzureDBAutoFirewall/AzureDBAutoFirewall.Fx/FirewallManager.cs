@@ -33,7 +33,7 @@ namespace AzureDBAutoFirewall.Fx
             //Receiving parameters into a firewallManager object
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var firewallManager = JsonConvert.DeserializeObject<FirewallManagerPayloadIn>(requestBody);
-            firewallManager.NewIp = req.Headers["X -Forwarded-For"][0];
+            firewallManager.NewIp = GetIpFromRequestHeaders(req);
             firewallManager.SetStorage(storageConnectionString, controlTableName);
 
             //Determining the location of the auth file
@@ -41,7 +41,7 @@ namespace AzureDBAutoFirewall.Fx
             var authFilePath = String.IsNullOrEmpty(home) ?
                 @$"..\..\..\{authFile}" :
                 Path.Combine(home, @"site\wwwroot\Files", authFile);
-           
+
 
             if (firewallManager.Authorize())
             {
@@ -69,24 +69,27 @@ namespace AzureDBAutoFirewall.Fx
                             .WithIPAddress(firewallManager.NewIp)
                             .Create();
 
+                    //Clean the token from FirewallManager to Save storage space in table storage
+                    firewallManager.Token = string.Empty;
+
                     //Audit the operation
                     var firewallEntities = new List<FirewallManagerPayloadIn>()
-                { 
-                    //Token registry update (to mark last ip)
-                    new FirewallManagerPayloadIn()
-                    {
-                        PartitionKey = firewallManager.PartitionKey,
-                        RowKey = "token",
-                        NewIp = firewallManager.NewIp
-                    },
-                    //Operation insert (to have traceability)
-                    firewallManager
-                };
+                    { 
+                        //Token registry update (to mark last ip)
+                        new FirewallManagerPayloadIn()
+                        {
+                            PartitionKey = firewallManager.PartitionKey,
+                            RowKey = "token",
+                            NewIp = firewallManager.NewIp
+                        },
+                        //Operation insert (to have traceability)
+                        firewallManager
+                    };
                     //Excute the batch insertion
                     firewallManager.BatchInsertOrMerge(firewallEntities);
                     return new OkObjectResult("Firewall configured OK");
                 }
-                catch(Exception exc)
+                catch (Exception exc)
                 {
                     return new ConflictObjectResult(exc);
                 }
@@ -102,6 +105,11 @@ namespace AzureDBAutoFirewall.Fx
                 .Configure()
                 .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
                 .Authenticate(credentials).WithSubscription(subscriptionId);
+        }
+
+        private static string GetIpFromRequestHeaders(HttpRequest request)
+        {
+            return (request.Headers["X-Forwarded-For"].FirstOrDefault() ?? "").Split(new char[] { ':' }).FirstOrDefault();
         }
     }
 }
