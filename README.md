@@ -11,8 +11,8 @@ This implies that you need to have an Azure Table ready with all the usernames a
 #### Azure Table required structure
 A picture is worth a thousand words:
 ![Initial State](https://lh3.googleusercontent.com/mcmNXDALE6sbgwMKRtBzSdTaHGcRJchZYRcmvAeq3QODZJoFlR5Dnb_jn_wsbpMUkLgR0U7Zpm4 "Initial State")
-This is how the table will look before
+This is how the table will look before the system starts working. You could be tempted to think: "Why not just inserting the token as the RowKey?" But, as this solution also offers audit for all the request
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAyNjE3OTEzMCwtOTk5NTgzMDAxLDEwMD
+eyJoaXN0b3J5IjpbMTQ4NzUwMTc2NSwtOTk5NTgzMDAxLDEwMD
 YyMjQyNTAsLTc1MjU1NDU0NV19
 -->
