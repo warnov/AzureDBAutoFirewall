@@ -28,11 +28,13 @@ The function needs to know what table it is going to use to authorize and keep t
 |AzureAuthLocation|Name of the Azure Authorization file
 
 #### Azure Authorization File
-By now, you know that all the magic is done by the Azure Function. But, we have to give it privileged access to the subscription to make these firewall rules effective. As mentioned before, the operations are made using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet). This API requires a Service Principal (an identity with permissions) to get authenticated and execute operations over the subscription. You can create one  (being subscription owner) using the Azure CLI:
+By now, you know that all the magic is done by the Azure Function. But, we have to give it privileged access to the subscription to make these firewall rules effective. As mentioned before, the operations are made using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet). 
+This API requires a Service Principal (an identity with permissions) to get authenticated and execute operations over the subscription. You can create one  (being subscription owner) using the Azure CLI:
 
     az ad sp create-for-rbac --sdk-auth
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDYxMDU2MjIsMTIxNDg4OTYyMCwtOT
-k5NTgzMDAxLDEwMDYyMjQyNTAsLTc1MjU1NDU0NV19
+eyJoaXN0b3J5IjpbMjg4NTQwMDU2LC0xOTQ2MTA1NjIyLDEyMT
+Q4ODk2MjAsLTk5OTU4MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1
+NDVdfQ==
 -->
