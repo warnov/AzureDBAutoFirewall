@@ -38,13 +38,13 @@ Once you have all the pieces deployed:
  1. The table with authorized users
  2. The Azure Function 
     	2.1. App Settings adjusted
-    	2.2. Authorization file uploaded
-    The core client application deployed on a client machine with a valid username, token and url for the function.
+    	2.2. Authorization file uploaded    	
+ 3. The core client application deployed on a client machine with a valid username, token and url for the function.
 
-List item
+Then you, as a client just have to launch the core client .exe and let the magic happens. Then, as a sysadmin, you just have to access the table and audit the operations or CRUD users.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ1NjYxNjE4MywxNzY4NzgwMjYzLC0yMz
+eyJoaXN0b3J5IjpbLTQ3NTMzMzUzOCwxNzY4NzgwMjYzLC0yMz
 g5NzQwNDUsLTE5NDYxMDU2MjIsMTIxNDg4OTYyMCwtOTk5NTgz
 MDAxLDEwMDYyMjQyNTAsLTc1MjU1NDU0NV19
 -->
