@@ -32,8 +32,12 @@ By now, you know that all the magic is done by the Azure Function. As mentioned 
 
     az ad sp create-for-rbac --sdk-auth > my.auth
 In this example, the service principal will have access to the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet) and is stored in a file named `my.auth`. This file should be securely accessible by the function, so you could put it in the file system of the function. For this implementation, we have created a folder called Files under wwwroot in the functions file system and uploaded the file there. The name of the file then will be the value for the parameter `AzureAuthLocation` referenced before.
+## Execution
+Once you have all the pieces deployed:
+1. The table with authorized users
+2. The function wi
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2ODc4MDI2MywtMjM4OTc0MDQ1LC0xOT
-Q2MTA1NjIyLDEyMTQ4ODk2MjAsLTk5OTU4MzAwMSwxMDA2MjI0
-MjUwLC03NTI1NTQ1NDVdfQ==
+eyJoaXN0b3J5IjpbLTE5MjYzODYxMzYsMTc2ODc4MDI2MywtMj
+M4OTc0MDQ1LC0xOTQ2MTA1NjIyLDEyMTQ4ODk2MjAsLTk5OTU4
+MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1NDVdfQ==
 -->
