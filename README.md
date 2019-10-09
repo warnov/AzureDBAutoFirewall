@@ -9,8 +9,10 @@ With this proposed solution you will need to have the dotnet core client .exe in
 Then, you will need to deploy the Azure Function. It only accepts POST messages. And the post message has included the authentication data and nothing else is required, since the IP is automatically detected by the function itself. So the function authenticate the request (comparing the username and token against an Azure Table) and if authentication is successful it will add/update the rule on the firewall.
 This implies that you need to have an Azure Table ready with all the usernames and tokens you want to allow to make this request. This operation of access directly the DB is not something that you will open to all the public. Just a well defined set of users. So I consider having this authentication approach will be enough. Nevertheless, you are welcomed to contribute with more sophisticated mechanisms.
 #### Azure Table required structure
-
+A picture is worth a thousand words:
+![Initial State](https://lh3.googleusercontent.com/mcmNXDALE6sbgwMKRtBzSdTaHGcRJchZYRcmvAeq3QODZJoFlR5Dnb_jn_wsbpMUkLgR0U7Zpm4 "Initial State")
+This is how the table will look before
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODc1NDExOTYsLTk5OTU4MzAwMSwxMD
-A2MjI0MjUwLC03NTI1NTQ1NDVdfQ==
+eyJoaXN0b3J5IjpbMjAyNjE3OTEzMCwtOTk5NTgzMDAxLDEwMD
+YyMjQyNTAsLTc1MjU1NDU0NV19
 -->
