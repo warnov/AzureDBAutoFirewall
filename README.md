@@ -31,9 +31,9 @@ The function needs to know what table it is going to use to authorize and keep t
 By now, you know that all the magic is done by the Azure Function. As mentioned before, the operations are made using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet); so the function needs permissions to read and create resources in your Azure subscription in order to use the Azure Management Libraries for .NET. To this end, you need to [create a service principal](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet#mgmt-file) and configure your app to run with its credentials to grant this access. Service principals provide a way to create a non-interactive account associated with your identity to which you grant only the privileges your app needs to run. You can create one using the Azure CLI:
 
     az ad sp create-for-rbac --sdk-auth > my.auth
-In this example, the service principal will have access to the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet) and is stored in a file named `my.auth`. This file should be securely accessible by the function, so you could put it in the file system of the function. For this implementation, we have created a folder called Files under wwwroot in the functions file system and uploaded the 
+In this example, the service principal will have access to the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet) and is stored in a file named `my.auth`. This file should be securely accessible by the function, so you could put it in the file system of the function. For this implementation, we have created a folder called Files under wwwroot in the functions file system and uploaded the file there. The name of the file then will be the value for the parameter `AzureAuthLocation` referenced before.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTMzNzAxNjgsLTIzODk3NDA0NSwtMT
-k0NjEwNTYyMiwxMjE0ODg5NjIwLC05OTk1ODMwMDEsMTAwNjIy
-NDI1MCwtNzUyNTU0NTQ1XX0=
+eyJoaXN0b3J5IjpbMTc2ODc4MDI2MywtMjM4OTc0MDQ1LC0xOT
+Q2MTA1NjIyLDEyMTQ4ODk2MjAsLTk5OTU4MzAwMSwxMDA2MjI0
+MjUwLC03NTI1NTQ1NDVdfQ==
 -->
