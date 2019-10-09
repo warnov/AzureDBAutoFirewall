@@ -23,11 +23,11 @@ The function needs to know what table it is going to use to authorize and keep t
 |--|--|
 |SubscriptionId|Id of the subscription owner of the SQL Server we will be working with
 |SqlServerName|The name of the server we will be allowing access
-|AzureConnectionString|
-"ControlTableName": "Fi
-"AzureAuthLocation": "i |  |
+|AzureConnectionString|The connection string for the storage account with the control table
+|ControlTableName|Name of the Azure table for Auth and Audit
+|AzureAuthLocation|Name of the Az
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTU3ODY2NTgsMTIxNDg4OTYyMCwtOT
-k5NTgzMDAxLDEwMDYyMjQyNTAsLTc1MjU1NDU0NV19
+eyJoaXN0b3J5IjpbNDg0NzYyMjc3LDEyMTQ4ODk2MjAsLTk5OT
+U4MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1NDVdfQ==
 -->
