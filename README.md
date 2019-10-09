@@ -11,10 +11,12 @@ This implies that you need to have an Azure Table ready with all the usernames a
 #### Azure Table required structure
 A picture is worth a thousand words:
 ![Initial State](https://lh3.googleusercontent.com/mcmNXDALE6sbgwMKRtBzSdTaHGcRJchZYRcmvAeq3QODZJoFlR5Dnb_jn_wsbpMUkLgR0U7Zpm4 "Initial State")
-This is how the table will look before the system starts working. You could be tempted to think: "Why not just inserting the token as the RowKey?" But, as this solution also offers audit for all the requests made (when new firewall updates were requested, by whom and through which IPs), we would need 2 tables to have these records and then extra development work to keep these tables in sync. So I came with this approach of using just one table partitioned by users. And the RowKey will have either the word token to identify were to find the token for a user (and then be able to authenticate it) or a datetime indicating a request made by that user, among all the information of that transaction:
+This is how the table will look before the system starts working. You just add one registry for each of the users you want to have access to the service. Among its username as PartitionKey, you also insert the keyword "token" as RowKey and then the token itself: I recommend a GUID.
+
+You could be tempted to think: "Why not just inserting the token as the RowKey?" But, as this solution also offers audit for all the requests made (when new firewall updates were requested, by whom and through which IPs), we would need 2 tables to have these records and then extra development work to keep these tables in sync. So I came with this approach of using just one table partitioned by users. And the RowKey will have either the word token to identify were to find the token for a user (and then be able to authenticate it) or a datetime indicating a request made by that user, among all the information of that transaction:
 ![Working State](https://lh3.googleusercontent.com/lQM3sLpvGLh18Brf6SXZZYO6StewjNGhM-rqkxvK5LX5MCseaYf6kxTNAfC62iZIWm1sK5OHbSA "Working State")
 Here is the table after some operation
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxMzA5NzIzNCwtOTk5NTgzMDAxLDEwMD
+eyJoaXN0b3J5IjpbMTM5NzU2NDY5MCwtOTk5NTgzMDAxLDEwMD
 YyMjQyNTAsLTc1MjU1NDU0NV19
 -->
