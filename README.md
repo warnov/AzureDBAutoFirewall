@@ -28,13 +28,12 @@ The function needs to know what table it is going to use to authorize and keep t
 |AzureAuthLocation|Name of the Azure Authorization file
 
 #### Azure Authorization File
-By now, you know that all the magic is done by the Azure Function. As mentioned before, the operations are made using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet); so the function needs permissions to read and create resources in your Azure subscription in order to use the Azure Management Libraries for .NET. To this end, you need to [create a service principal](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet#mgmt-file) and configure your app to run with its credentials to grant this access. Service principals provide a way to create a non-interactive account associated with your identity to which you grant only the privileges your app needs to run.
-This API requires a Service Principal (an identity with permissions) to get authenticated and execute operations over the subscription. You can create one  (being subscription owner) using the Azure CLI:
+By now, you know that all the magic is done by the Azure Function. As mentioned before, the operations are made using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet); so the function needs permissions to read and create resources in your Azure subscription in order to use the Azure Management Libraries for .NET. To this end, you need to [create a service principal](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet#mgmt-file) and configure your app to run with its credentials to grant this access. Service principals provide a way to create a non-interactive account associated with your identity to which you grant only the privileges your app needs to run. You can create one using the Azure CLI:
 
-    az ad sp create-for-rbac --sdk-auth
-
+    az ad sp create-for-rbac --sdk-auth > my.auth
+In this example, the service principal is stored in a f
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzODk3NDA0NSwtMTk0NjEwNTYyMiwxMj
-E0ODg5NjIwLC05OTk1ODMwMDEsMTAwNjIyNDI1MCwtNzUyNTU0
-NTQ1XX0=
+eyJoaXN0b3J5IjpbLTYwOTg3ODc3NywtMjM4OTc0MDQ1LC0xOT
+Q2MTA1NjIyLDEyMTQ4ODk2MjAsLTk5OTU4MzAwMSwxMDA2MjI0
+MjUwLC03NTI1NTQ1NDVdfQ==
 -->
