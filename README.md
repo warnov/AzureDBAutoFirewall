@@ -6,7 +6,7 @@ You have a SQL Azure Database server that needs to be directly accessed from man
 Having a small application that runs on the client machines and able to request Azure for a firewall rule update without human intervention will be relieving in terms of support cases. Obviously, this operation requires privileged access to Azure that can not be granted to each client. So a centralizing service authorizing requests and executing the firewall rules update is required. And that centralized service is **AzureDBAutoFirewall** that for this case has been deployed on an Azure Function. But you could easily deploy it on any other computing resource such as a WebAPI, a WebSite, a container, etc. 
 ### How it works
 With this proposed solution you will need to have the dotnet core client .exe installed on the machine you want to use to access the Azure SQL Database Server. This .exe must have in its same directory an `auth.json` file that will contain the credentials you will be using to ask for the firewall rules to update. For this implementation, just a username and a token were used (the username is used to name the firewall rule we will be adding/updating on Azure). 
-Then, you will need to deploy the Azure Function. It only accepts POST messages. And the post message has included the authentication data and nothing else is required, since the IP is automatically detected by the function itself. So the function authenticate the request (comparing the username and token against an Azure Table) and if authentication is successful it will add/update the rule on the firewall using the Azure Fluent API.
+Then, you will need to deploy the Azure Function. It only accepts POST messages. And the post message has included the authentication data and nothing else is required, since the IP is automatically detected by the function itself. So the function authenticate the request (comparing the username and token against an Azure Table) and if authentication is successful it will add/update the rule on the firewall using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet).
 This implies that you need to have an Azure Table ready with all the usernames and tokens you want to allow to make this request. This operation of access directly the DB is not something that you will open to all the public. Just a well defined set of users. So I consider having this authentication approach will be enough. Nevertheless, you are welcomed to contribute with more sophisticated mechanisms.
 #### Azure Table required structure
 A picture is worth a thousand words:
@@ -27,8 +27,8 @@ The function needs to know what table it is going to use to authorize and keep t
 |ControlTableName|Name of the Azure table for Auth and Audit
 |AzureAuthLocation|Name of the Azure Authorization file
 
-
+#### Azure Authorizat
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc2NDIzNDA3NCwxMjE0ODg5NjIwLC05OT
-k1ODMwMDEsMTAwNjIyNDI1MCwtNzUyNTU0NTQ1XX0=
+eyJoaXN0b3J5IjpbNDQwOTg1NTY2LDEyMTQ4ODk2MjAsLTk5OT
+U4MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1NDVdfQ==
 -->
