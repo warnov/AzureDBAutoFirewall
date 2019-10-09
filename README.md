@@ -28,8 +28,8 @@ The function needs to know what table it is going to use to authorize and keep t
 |AzureAuthLocation|Name of the Azure Authorization file
 
 #### Azure Authorization File
-By now, you know that all the magic is done by the Azure Function. But, we have to give it privileged access to the subscription
+By now, you know that all the magic is done by the Azure Function. But, we have to give it privileged access to the subscription to make these firewall rules effective. As mentioned before, the operations are made using the [Azure Management Fluent API](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-concepts?view=azure-dotnet). This API requires an IAzure object that represents all the subscription we want to work with 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzOTg0NDAyMiwxMjE0ODg5NjIwLC05OT
-k1ODMwMDEsMTAwNjIyNDI1MCwtNzUyNTU0NTQ1XX0=
+eyJoaXN0b3J5IjpbLTE2NzQwODYyNTksMTIxNDg4OTYyMCwtOT
+k5NTgzMDAxLDEwMDYyMjQyNTAsLTc1MjU1NDU0NV19
 -->
