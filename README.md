@@ -21,13 +21,13 @@ The function needs to know what table it is going to use to authorize and keep t
 
 | Setting |Description  |
 |--|--|
-|SqlServerName| "dbsrv
-"SubscriptionId": "ff73
-"AzureConnectionString"
+|SubscriptionId|Id of the subscription owner of the SQL Server we will be working with
+|SqlServerName|The name of the server we will be allowing access
+|AzureConnectionString|
 "ControlTableName": "Fi
 "AzureAuthLocation": "i |  |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzUzODU3ODQ4LDEyMTQ4ODk2MjAsLTk5OT
-U4MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1NDVdfQ==
+eyJoaXN0b3J5IjpbLTEzMTU3ODY2NTgsMTIxNDg4OTYyMCwtOT
+k5NTgzMDAxLDEwMDYyMjQyNTAsLTc1MjU1NDU0NV19
 -->
