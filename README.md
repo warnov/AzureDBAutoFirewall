@@ -15,8 +15,10 @@ This is how the table will look before the system starts working. You just add o
 
 You could be tempted to think: "Why not just inserting the token as the RowKey?" But, as this solution also offers audit for all the requests made (when new firewall updates were requested, by whom and through which IPs), we would need 2 tables to have these records and then extra development work to keep these tables in sync. So I came with this approach of using just one table partitioned by users. And the RowKey will have either the word token to identify were to find the token for a user (and then be able to authenticate it) or a datetime indicating a request made by that user, among all the information of that transaction:
 ![Working State](https://lh3.googleusercontent.com/lQM3sLpvGLh18Brf6SXZZYO6StewjNGhM-rqkxvK5LX5MCseaYf6kxTNAfC62iZIWm1sK5OHbSA "Working State")
-Here is the table after some operation ordered descending by RowKey. You can find here that the user developer1 has never requested the service while QATeam has its current firewall rule set to the IP 161.220.150.31; and that this last change was requested on 2019-10-09T19:12:00.9577602Z and finally that the value from the IP before this was 160.22.15.31. So we have a complete traceability here. All this data is filled by the function 
+Here is the table after some operation ordered descending by RowKey. You can find here that the user developer1 has never requested the service while QATeam has its current firewall rule set to the IP 161.220.150.31; and that this last change was requested on 2019-10-09T19:12:00.9577602Z and finally that the value from the IP before this was 160.22.15.31. So we have a complete traceability here. All this data is filled by the function so you don't have to make any additional manual work besides initializing the table with usernames and tokens.
+#### Azure Function required parameters
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5Mzg4NDQ0NSwtOTk5NTgzMDAxLDEwMD
+eyJoaXN0b3J5IjpbMTIxNDg4OTYyMCwtOTk5NTgzMDAxLDEwMD
 YyMjQyNTAsLTc1MjU1NDU0NV19
 -->
