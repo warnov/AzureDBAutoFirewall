@@ -27,8 +27,9 @@ The function needs to know what table it is going to use to authorize and keep t
 |ControlTableName|Name of the Azure table for Auth and Audit
 |AzureAuthLocation|Name of the Azure Authorization file
 
-#### Azure Authorizat
+#### Azure Authorization File
+By now, you know that all the magic is done by the Azure Function. But, we have to give it privileged access to the subscription
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDQwOTg1NTY2LDEyMTQ4ODk2MjAsLTk5OT
-U4MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1NDVdfQ==
+eyJoaXN0b3J5IjpbLTIzOTg0NDAyMiwxMjE0ODg5NjIwLC05OT
+k1ODMwMDEsMTAwNjIyNDI1MCwtNzUyNTU0NTQ1XX0=
 -->
