@@ -6,8 +6,12 @@ You have a SQL Azure Database server that needs to be directly accessed from man
 Having a small application that runs on the client machines and able to request Azure for a firewall rule update without human intervention will be relieving in terms of support cases. Obviously, this operation requires privileged access to Azure that can not be granted to each client. So a centralizing service authorizing requests and executing the firewall rules update is required. And that centralized service is **AzureDBAutoFirewall** that for this case has been deployed on an Azure Function. But you could easily deploy it on any other computing resource such as a WebAPI, a WebSite, a container, etc. 
 ### How it works
 With this proposed solution you will need to have the dotnet core client .exe installed on the machine you want to use to access the Azure SQL Database Server. This .exe must have in its same directory an `auth.json` file that will contain the credentials you will be using to ask for the firewall rules to update. For this implementation, just a username and a token were used (the username is used to name the firewall rule we will be adding/updating on Azure). 
-Then, you will need to deploy the Azure Function. It only accepts POST messages. And the post message has included the authentication data and nothing else is required
+Then, you will need to deploy the Azure Function. It only accepts POST messages. And the post message has included the authentication data and nothing else is required, since the IP is automatically detected by the function itself. So the steps performed bu the function are:
+
+ 1. Authenticate the request (comparing the username and token against an Azure Table
+ 2. 
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxMDYwMjQ2OCwxMDA2MjI0MjUwLC03NT
-I1NTQ1NDVdfQ==
+eyJoaXN0b3J5IjpbMzg4MzUzNTM2LDEwMDYyMjQyNTAsLTc1Mj
+U1NDU0NV19
 -->
