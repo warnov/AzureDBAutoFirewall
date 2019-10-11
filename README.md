@@ -12,11 +12,13 @@ This implies that you need to have an Azure Table ready with all the usernames a
 A picture is worth a thousand words:
 
 ![Initial State](https://lh3.googleusercontent.com/mcmNXDALE6sbgwMKRtBzSdTaHGcRJchZYRcmvAeq3QODZJoFlR5Dnb_jn_wsbpMUkLgR0U7Zpm4 "Initial State")
+
 This is how the table will look before the system starts working. You just add one registry for each of the users you want to have access to the service. Among its username as PartitionKey, you also insert the keyword "token" as RowKey and then the token itself: I recommend a GUID.
 
 You could be tempted to think: "Why not just inserting the token as the RowKey?" As this solution also offers audit for all the requests made (when new firewall updates were requested, by whom and through which IPs), we would need 2 tables to have these records and then extra development work to keep these tables in sync. So I came up with this approach of using just one table partitioned by users. And the RowKey will have either the word token to identify were to find the token for a user (and then be able to authenticate it) or a datetime indicating a request made by that user, among all the information of that transaction:
 
 ![Working State](https://lh3.googleusercontent.com/lQM3sLpvGLh18Brf6SXZZYO6StewjNGhM-rqkxvK5LX5MCseaYf6kxTNAfC62iZIWm1sK5OHbSA "Working State")
+
 Here is the table after some operation ordered descending by RowKey. You can find here that the user developer1 has never requested the service while QATeam has its current firewall rule set to the IP 161.220.150.31; and that this last change was requested on 2019-10-09T19:12:00.9577602Z and finally that the value from the IP before this was 160.22.15.31. So we have a complete traceability here. All this data is filled by the function so you don't have to make any additional manual work besides initializing the table with usernames and tokens.
 #### Azure Function required parameters
 The function needs to know what table it is going to use to authorize and keep track of the operations. Also, how to access that table (Azure Storage Connection String). Besides, what server firewall is going to be used, and so on. So it is required that you set up these application settings once the function is deployed:
@@ -46,8 +48,8 @@ Once you have all the pieces deployed:
 Then you, as a client just have to launch the core client .exe and let the magic happens. As a sysadmin, you just have to access the table and audit the operations or CRUD users.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI1NTc1NDcxNywxMDY0MDI4MzQ1LC00Nz
-UzMzM1MzgsMTc2ODc4MDI2MywtMjM4OTc0MDQ1LC0xOTQ2MTA1
-NjIyLDEyMTQ4ODk2MjAsLTk5OTU4MzAwMSwxMDA2MjI0MjUwLC
-03NTI1NTQ1NDVdfQ==
+eyJoaXN0b3J5IjpbLTEwNDExNTMyODcsMTA2NDAyODM0NSwtND
+c1MzMzNTM4LDE3Njg3ODAyNjMsLTIzODk3NDA0NSwtMTk0NjEw
+NTYyMiwxMjE0ODg5NjIwLC05OTk1ODMwMDEsMTAwNjIyNDI1MC
+wtNzUyNTU0NTQ1XX0=
 -->
