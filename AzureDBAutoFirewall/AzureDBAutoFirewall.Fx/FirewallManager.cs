@@ -56,38 +56,50 @@ namespace AzureDBAutoFirewall.Fx
                         where server.Name == sqlServerName
                         select server).FirstOrDefault();
 
-                    //Delete old rule
-                    var oldFirewallRule =
-                        (from fwrule in sqlServer.FirewallRules.List()
-                         where fwrule.StartIPAddress == firewallManager.OldIp
-                         select fwrule).FirstOrDefault();
-                    if (oldFirewallRule != null)
-                        oldFirewallRule.Delete();
+                    if (sqlServer != null)
+                    {
+                        #region Executing
+                        //Delete old rule
+                        var oldFirewallRule =
+                            (from fwrule in sqlServer.FirewallRules.List()
+                             where fwrule.StartIPAddress == firewallManager.OldIp
+                             select fwrule).FirstOrDefault();
+                        if (oldFirewallRule != null)
+                            oldFirewallRule.Delete();
 
-                    //Add new Rule
-                    var newFirewallRule = sqlServer.FirewallRules.Define(firewallManager.UserName)
-                            .WithIPAddress(firewallManager.NewIp)
-                            .Create();
+                        //Add new Rule
+                        var newFirewallRule = sqlServer.FirewallRules.Define(firewallManager.UserName)
+                                .WithIPAddress(firewallManager.NewIp)
+                                .Create();
+                        #endregion
 
-                    //Clean the token from FirewallManager to Save storage space in table storage
-                    firewallManager.Token = string.Empty;
+                        #region Auditing
+                        //Clean the token from FirewallManager to Save storage space in table storage
+                        firewallManager.Token = string.Empty;
+                        //Audit the operation
+                        var firewallEntities = new List<FirewallManagerPayloadIn>()
+                        { 
+                            //Token registry update (to mark last ip)
+                            new FirewallManagerPayloadIn()
+                            {
+                                PartitionKey = firewallManager.PartitionKey,
+                                RowKey = "token",
+                                NewIp = firewallManager.NewIp
+                            },
+                            //Operation insert (to have traceability)
+                            firewallManager
+                        };
+                        //Excute the batch insertion
+                        firewallManager.BatchInsertOrMerge(firewallEntities);
+                        #endregion
 
-                    //Audit the operation
-                    var firewallEntities = new List<FirewallManagerPayloadIn>()
-                    { 
-                        //Token registry update (to mark last ip)
-                        new FirewallManagerPayloadIn()
-                        {
-                            PartitionKey = firewallManager.PartitionKey,
-                            RowKey = "token",
-                            NewIp = firewallManager.NewIp
-                        },
-                        //Operation insert (to have traceability)
-                        firewallManager
-                    };
-                    //Excute the batch insertion
-                    firewallManager.BatchInsertOrMerge(firewallEntities);
-                    return new OkObjectResult("Firewall configured OK");
+
+                        return new OkObjectResult("Firewall configured OK");
+                    }
+                    else
+                    {
+                        return new ConflictObjectResult("Unknown SQLSVR");
+                    }
                 }
                 catch (Exception exc)
                 {
