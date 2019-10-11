@@ -41,10 +41,10 @@ Once you have all the pieces deployed:
     	2.2. Authorization file uploaded    	
  3. The core client application deployed on a client machine with a valid username, token and url for the function.
 
-Then you, as a client just have to launch the core client .exe and let the magic happens. Then, as a sysadmin, you just have to access the table and audit the operations or CRUD users.
+Then you, as a client just have to launch the core client .exe and let the magic happens. As a sysadmin, you just have to access the table and audit the operations or CRUD users.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3MTM4MzU2MCwtNDc1MzMzNTM4LDE3Nj
+eyJoaXN0b3J5IjpbMTA2NDAyODM0NSwtNDc1MzMzNTM4LDE3Nj
 g3ODAyNjMsLTIzODk3NDA0NSwtMTk0NjEwNTYyMiwxMjE0ODg5
 NjIwLC05OTk1ODMwMDEsMTAwNjIyNDI1MCwtNzUyNTU0NTQ1XX
 0=
