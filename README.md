@@ -1,7 +1,7 @@
 # AzureDBAutoFirewall
 An Azure Function that automatically adds and remove exceptions from Azure Database Firewall. It ships a dotnet core console client so authorized client machines can request a new firewall exception whenever their IP addresses change.
 ## Use case
-You have a SQL Azure Database server that needs to be directly accessed from many machines outside Azure (not a very good practice). So you have to [add authorized IPs](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-server-level-firewall-rule) for each of those IPs in the servers' firewall. If those client machines don't have a static IP address you will be receiving tons of calls asking you to add new firewall rules every time their IPs change.
+You have a SQL Azure Database server that needs to be directly accessed from many machines outside Azure (not a very good practice). So you have to [add authorized IPs](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-server-level-firewall-rule) for each of those IPs in the servers' firewall. If those client machines don't have a static IP address you will be receiving tons of calls asking you to add new firewall rule every time their IPs change.
 ## Solution 
 Having a small application that runs on the client machines and able to request Azure for a firewall rule update without human intervention will be relieving in terms of support cases. Obviously, this operation requires privileged access to Azure that can not be granted to each client. So a centralizing service authorizing requests and executing the firewall rules update is required. And that centralized service is **AzureDBAutoFirewall** that for this case has been deployed on an Azure Function. But you could easily deploy it on any other computing resource such as a WebAPI, a WebSite, a container, etc. 
 ### How it works
@@ -44,7 +44,8 @@ Once you have all the pieces deployed:
 Then you, as a client just have to launch the core client .exe and let the magic happens. Then, as a sysadmin, you just have to access the table and audit the operations or CRUD users.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3NTMzMzUzOCwxNzY4NzgwMjYzLC0yMz
-g5NzQwNDUsLTE5NDYxMDU2MjIsMTIxNDg4OTYyMCwtOTk5NTgz
-MDAxLDEwMDYyMjQyNTAsLTc1MjU1NDU0NV19
+eyJoaXN0b3J5IjpbNTQ1NDQzNDI5LC00NzUzMzM1MzgsMTc2OD
+c4MDI2MywtMjM4OTc0MDQ1LC0xOTQ2MTA1NjIyLDEyMTQ4ODk2
+MjAsLTk5OTU4MzAwMSwxMDA2MjI0MjUwLC03NTI1NTQ1NDVdfQ
+==
 -->
