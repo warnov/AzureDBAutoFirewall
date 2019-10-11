@@ -10,13 +10,13 @@ namespace AzureDBAutoFirewall.CoreConsole
     {
         static void Main(string[] args)
         {
-            System.Environment.SetEnvironmentVariable("sqlServerName", "dbsrvintelapp");
-            System.Environment.SetEnvironmentVariable("subscriptionId", "ff735c14-ae5a-4322-bbcf-4155bb380106");
-            System.Environment.SetEnvironmentVariable("azureAuthLocation", @"c:\tmp\intelapp.azureauth");
+            System.Environment.SetEnvironmentVariable("sqlServerName", "yyyyyyyyyyyyyy");
+            System.Environment.SetEnvironmentVariable("subscriptionId", "xxxxxxxxxxxxxxxxxx");
+            System.Environment.SetEnvironmentVariable("azureAuthLocation", @"c:\aaa\bbbb.azureauth");
 
 
-            var oldIp = "186.154.178.222";
-            string clientIP = "191.102.89.111";
+            var oldIp = "186.154.aaa.yyy";
+            string clientIP = "191.aaa.89.xxx";
             var sqlServerName = Environment.GetEnvironmentVariable("sqlServerName");
             var authFile = Environment.GetEnvironmentVariable("azureAuthLocation");
             var subscriptionId = Environment.GetEnvironmentVariable("subscriptionId");
